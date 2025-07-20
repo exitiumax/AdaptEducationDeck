@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adapt Education Pitch Deck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: white;
+      color: #333;
+    }
+    .deck {
+      padding: 0;
+      max-width: none;
+      margin: auto;
+      position: relative;
+    }
+    .slide {
+      display: none;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      transform-origin: left center;
+      transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    }
+    .slide.active {
+      display: block;
+    }
+    .slide.hide-left {
+      transform: rotateY(90deg) scale(0.9);
+      opacity: 0;
+    }
+    .slide.hide-right {
+      transform: rotateY(-90deg) scale(0.9);
+      opacity: 0;
+    }
+    h1, h2 {
+      margin-top: 0;
+    }
+    
+    /* Override slide styling for landing page to remove boxes */
+    .slide:first-child {
+      background: #f8f9fa !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      max-width: none !important;
+      margin: 0 !important;
+    }
+    
+    /* Override deck container for landing page */
+    .deck {
+      max-width: none;
+    }
+    
+    .slide:first-child .minimal-landing-container {
+      width: 100vw;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    
+    /* Minimal Flat Landing Page Styles */
+    .minimal-landing-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f8f9fa;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .logo-container {
+      margin-bottom: 40px;
+      cursor: pointer;
+    }
+    
+    .landing-logo {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .slogan-container {
+      margin: 0;
+      padding: 0;
+    }
+    
+    .landing-slogan {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .adapt-text {
+      color: #114247;
+    }
+    
+    .excel-text {
+  background: linear-gradient(135deg, #1fab59, #A8F5C0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .logo-container {
+        margin-bottom: 30px;
+      }
+      
+      .landing-logo {
+        max-width: 280px;
+      }
+      
+      .landing-slogan {
+        font-size: 2.4rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .logo-container {
+        margin-bottom: 25px;
+      }
+      
+      .landing-logo {
+        max-width: 240px;
+      }
+      
+      .landing-slogan {
+        font-size: 2rem;
+      }
+    }
+    
+    @media (max-width: 320px) {
+      .landing-logo {
+        max-width: 200px;
+      }
+      
+      .landing-slogan {
+        font-size: 1.8rem;
+      }
+    }
+    .problem-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .problem-card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border-left: 4px solid #ff6b6b;
+    }
+    .problem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    .problem-card.active {
+      border-left-color: #1e88e5;
+      background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+    }
+    .solution-flex { display: flex; gap: 40px; align-items: center; }
+    .solution-visual { flex: 1; text-align: center; }
+    .solution-icon { width: 120px; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);}
+    .solution-features { flex: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .feature-card { background: #f8f9fa; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: box-shadow 0.2s; cursor: pointer; }
+    .feature-card:hover, .feature-card:focus { box-shadow: 0 6px 24px rgba(30,136,229,0.12); background: #e3f2fd; }
+    .market-stats-flex { display: flex; gap: 30px; justify-content: center; margin-bottom: 30px; }
+    .market-counter { background: #e3f2fd; border-radius: 16px; padding: 24px 32px; font-size: 2rem; font-weight: 700; color: #1e88e5; box-shadow: 0 2px 8px rgba(30,136,229,0.07); text-align: center; }
+    .market-segments { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; }
+    .segment-card { background: #f8f9fa; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: box-shadow 0.2s, background 0.2s; cursor: pointer; min-width: 200px; }
+    .segment-card:hover, .segment-card:focus { background: #e3f2fd; box-shadow: 0 6px 24px rgba(30,136,229,0.12); }
+    .competition-cards { display: flex; gap: 24px; justify-content: center; margin-top: 30px; }
+    .comp-card { background: #f8f9fa; border-radius: 12px; padding: 22px 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); min-width: 220px; transition: box-shadow 0.2s, background 0.2s; cursor: pointer; }
+    .comp-card:hover, .comp-card:focus { background: #e3f2fd; box-shadow: 0 6px 24px rgba(30,136,229,0.12); }
+    .comp-card h4 { color: #1e88e5; margin-bottom: 10px; }
+    .comp-card ul { padding-left: 18px; font-size: 1rem; color: #333; }
+    .gtm-steps { display: flex; gap: 24px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+    .gtm-step { background: #f8f9fa; border-radius: 12px; padding: 20px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); min-width: 200px; max-width: 260px; display: flex; align-items: flex-start; gap: 16px; transition: box-shadow 0.2s, background 0.2s; cursor: pointer; }
+    .gtm-step:hover, .gtm-step:focus { background: #e3f2fd; box-shadow: 0 6px 24px rgba(30,136,229,0.12); }
+    .gtm-step-num { background: #1e88e5; color: #fff; font-weight: 700; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-right: 8px; }
+    .gtm-step h4 { margin: 0 0 6px 0; color: #1e88e5; }
+    .gtm-step p { margin: 0; font-size: 0.98rem; color: #333; }
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.2);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 999;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .nav-arrow:hover {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .nav-arrow-left { left: 15px; }
+    .nav-arrow-right { right: 15px; }
+
+    /* --- FINANCIALS & FUNDING CHARTS --- */
+    .financial-chart {
+      height: 350px;
+      margin-bottom: 20px;
+    }
+    .funding-details {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    .funding-details > div:first-child {
+      flex: 1;
+    }
+    .funding-chart {
+      flex-basis: 300px;
+      height: 300px;
+    }
+
+    /* --- SCENARIO & FUNDING BUTTONS --- */
+    .scenario-buttons, .funding-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    .scenario-buttons button, .funding-button {
+      background: #f8f9fa;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+      font-family: 'Inter', sans-serif;
+    }
+    .scenario-buttons button:hover, .funding-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30, 136, 229, 0.15);
+      background: #e3f2fd;
+      border-color: #1e88e5;
+      color: #1e88e5;
+    }
+    .scenario-buttons button.active, .funding-button.active {
+      background: linear-gradient(135deg, #1e88e5, #4ecdc4);
+      border-color: #1e88e5;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(30, 136, 229, 0.3);
+    }
+    .scenario-buttons button:focus, .funding-button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.2);
+    }
+
+    /* --- SCENARIO CONTENT VISIBILITY --- */
+    .scenario-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    .scenario-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- FUNDING CONTENT --- */
+    .funding-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+    .funding-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .funding-details {
+        flex-direction: column;
+      }
+      .financial-chart {
+        height: 250px;
+      }
+      .scenario-buttons, .funding-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .scenario-buttons button, .funding-button {
+        width: 100%;
+      }
+    }
+
+    /* --- TEAM SLIDE STYLES --- */
+    .team-cards {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .card {
+      width: 280px;
+      height: 380px;
+      perspective: 1000px;
+      background-color: transparent;
+    }
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    /* Updated from hover to class-based flip */
+    .card-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden; /* Safari */
+      backface-visibility: hidden;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-front {
+      background-color: #ffffff;
+    }
+    .card-front::after {
+      content: 'Click to see bio';
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      color: #1e88e5;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover .card-front::after {
+      opacity: 1;
+    }
+    .card-back {
+      background-color: #1e88e5;
+      color: white;
+      transform: rotateY(180deg);
+    }
+    .team-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 15px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+    .team-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.2rem;
+      color: #1e88e5;
+    }
+    .card-back h3 {
+        color: white;
+    }
+    .card h4 {
+      margin: 0 0 12px 0;
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 600;
+    }
+    .education-item {
+      background: #f8f9fa;
+      padding: 8px 10px;
+      margin: 4px 0;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-left: 3px solid #1e88e5;
+      font-size: 0.8rem;
+      line-height: 1.3;
+      color: #555;
+    }
+    .education-item p { margin: 0; font-weight: 600; }
+    .education-item span { font-weight: 400; color: #666; }
+    .card-back p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    /* End of Team Slide Styles */
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <!-- Slide 1: Home -->
+    <div class="slide active">
+      <div class="minimal-landing-container">
+        <div class="logo-container" onclick="navigateToSlide(1, 'right')">
+          <img src="https://res.cloudinary.com/davwtxoeo/image/upload/v1752804835/c6e97531-9f66-465c-8ec0-3376004dcfd1_removalai_preview_fyhglz.png" alt="Adapt Education Logo" class="landing-logo">
+        </div>
+        <div class="slogan-container">
+          <div class="landing-slogan">
+            <span class="adapt-text">Adapt.</span> <span class="excel-text">Excel.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Problem & Opportunity -->
+    <div class="slide">
+        <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Problem Statement & Market Opportunity</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 35px;">
+          <div style="background: linear-gradient(135deg, #ff6b6b, #ee5a52); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(255, 107, 107, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 35px rgba(255, 107, 107, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(255, 107, 107, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="font-size: 2.5rem; margin-right: 15px;">📈</div>
+              <h3 style="margin: 0; font-size: 1.3rem;">Rising ADHD Diagnoses</h3>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">10.2%</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">of children (6.1M students) diagnosed with ADHD</div>
+            </div>
+            <p style="margin: 0; line-height: 1.5; opacity: 0.95;">42% increase since 2009 (CDC, 2023). Executive functioning challenges affect organization, time management, and academic performance nationwide.</p>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(78, 205, 196, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 35px rgba(78, 205, 196, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(78, 205, 196, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="font-size: 2.5rem; margin-right: 15px;">🎓</div>
+              <h3 style="margin: 0; font-size: 1.3rem;">Hypercompetitive Academic Environment</h3>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">3.4%</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">Harvard acceptance rate (2024)</div>
+            </div>
+            <p style="margin: 0; line-height: 1.5; opacity: 0.95;">Historic low acceptance rates at top colleges. Students need stronger executive functioning skills to manage increased workloads and competitive pressures.</p>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 35px rgba(245, 158, 11, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="font-size: 2.5rem; margin-right: 15px;">💰</div>
+              <h3 style="margin: 0; font-size: 1.3rem;">Growing Educational Spending</h3>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">$123.5B</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">global tutoring market by 2030</div>
+            </div>
+            <p style="margin: 0; line-height: 1.5; opacity: 0.95;">US families spend $6,000+ annually on private tutoring, with 38% of high schoolers receiving private academic support.</p>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 35px rgba(139, 92, 246, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(139, 92, 246, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="font-size: 2.5rem; margin-right: 15px;">🎯</div>
+              <h3 style="margin: 0; font-size: 1.3rem;">Inadequate Traditional Solutions</h3>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">Generic</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">tutoring fails to address root causes</div>
+            </div>
+            <p style="margin: 0; line-height: 1.5; opacity: 0.95;">Most tutoring focuses on subject content, not underlying executive functioning skills needed for independent learning.</p>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(6, 182, 212, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 35px rgba(6, 182, 212, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(6, 182, 212, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="font-size: 2.5rem; margin-right: 15px;">🏢</div>
+              <h3 style="margin: 0; font-size: 1.3rem;">Corporate Demand for EF Skills</h3>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">68%</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">of employers report skills gap</div>
+            </div>
+            <p style="margin: 0; line-height: 1.5; opacity: 0.95;">New hires lack time management and organizational skills (NACE, 2023). Young professionals struggle with workplace independence.</p>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #ec4899, #db2777); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(236, 72, 153, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 12px 35px rgba(236, 72, 153, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(236, 72, 153, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="font-size: 2.5rem; margin-right: 15px;">👨‍👩‍👧‍👦</div>
+              <h3 style="margin: 0; font-size: 1.3rem;">Family Stress & Burnout</h3>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">2+ hrs</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">parents spend daily managing academics</div>
+            </div>
+            <p style="margin: 0; line-height: 1.5; opacity: 0.95;">Families experience constant conflict over homework, organization, and independence, affecting mental health and family relationships.</p>
+          </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #1e88e5, #4ecdc4); color: white; border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(30, 136, 229, 0.15); text-align: center;">
+          <div style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 20px; display: inline-block; margin-bottom: 20px;">
+            <div style="font-size: 2.5rem; margin-bottom: 10px;">💡</div>
+            <h3 style="margin: 0; font-size: 1.5rem; font-weight: 700;">The Gap in the Market</h3>
+          </div>
+          <p style="font-size: 1.2rem; font-weight: 600; margin: 0; line-height: 1.6; opacity: 0.95;">
+            Traditional tutoring addresses symptoms, not causes. Students need specialized executive functioning coaching 
+            that builds lifelong skills for academic success, workplace readiness, and personal independence.
+          </p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Solution & Value -->
+    <div class="slide">
+        <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Our Solution: Personalized Executive Function Coaching</h2>
+        
+        <!-- Hero Section -->
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 40px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+          <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 50%; padding: 20px; margin-right: 20px;">
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Coaching Icon" style="width: 80px; height: 80px; filter: brightness(0) invert(1);">
+            </div>
+            <div>
+              <h3 style="margin: 0; font-size: 2rem; font-weight: 700;">Evidence-Based Coaching</h3>
+              <p style="margin: 5px 0 0 0; font-size: 1.1rem; opacity: 0.9;">Building lifelong skills for academic & workplace success</p>
+            </div>
+          </div>
+          <p style="font-size: 1.2rem; margin: 0; line-height: 1.6; opacity: 0.95;">
+            We don't just help students complete assignments—we teach the fundamental executive functioning skills 
+            they need to become independent, confident learners and professionals.
+          </p>
+        </div>
+
+        <!-- Core Features Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 35px;">
+          <div style="background: linear-gradient(135deg, #1e88e5, #1976d2); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(30, 136, 229, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(30, 136, 229, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(30, 136, 229, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                <div style="font-size: 2rem;">🎯</div>
+              </div>
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Personalized 1:1 Coaching</h4>
+            </div>
+            <p style="margin: 0; line-height: 1.6; opacity: 0.95;">Tailored plans for each student, college learner, or adult client, focusing on organization, time management, and self-advocacy skills that translate across all areas of life.</p>
+            <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 10px; margin-top: 15px; text-align: center;">
+              <strong>Individualized success plans</strong>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(78, 205, 196, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(78, 205, 196, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(78, 205, 196, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                <div style="font-size: 2rem;">📊</div>
+              </div>
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Data-Driven Progress</h4>
+            </div>
+            <p style="margin: 0; line-height: 1.6; opacity: 0.95;">Interactive dashboards for students and parents to track progress and set goals. Measurable outcomes that demonstrate real skill development and independence growth.</p>
+            <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 10px; margin-top: 15px; text-align: center;">
+              <strong>Transparent progress tracking</strong>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(245, 158, 11, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                <div style="font-size: 2rem;">💻</div>
+              </div>
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Flexible Delivery</h4>
+            </div>
+            <p style="margin: 0; line-height: 1.6; opacity: 0.95;">In-person, virtual, and hybrid options to meet every client's needs. Seamless technology integration that works with your schedule and learning preferences.</p>
+            <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 10px; margin-top: 15px; text-align: center;">
+              <strong>Meet students where they are</strong>
+            </div>
+          </div>
+
+          <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(139, 92, 246, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(139, 92, 246, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+              <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                <div style="font-size: 2rem;">🤝</div>
+              </div>
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Family & School Collaboration</h4>
+            </div>
+            <p style="margin: 0; line-height: 1.6; opacity: 0.95;">Regular check-ins and reports for families and partner schools. Comprehensive support system that ensures consistency across all learning environments.</p>
+            <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 10px; margin-top: 15px; text-align: center;">
+              <strong>Holistic support network</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Value Proposition -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; border-left: 6px solid #1e88e5; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+          <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+            <div style="background: #1e88e5; color: white; border-radius: 50%; padding: 15px; margin-right: 20px;">
+              <div style="font-size: 1.8rem;">🚀</div>
+            </div>
+            <h3 style="margin: 0; color: #1e88e5; font-size: 1.8rem; font-weight: 700;">Why Executive Function Coaching Works</h3>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; text-align: center;">
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+              <div style="font-size: 2.5rem; margin-bottom: 10px;">🧠</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px;">Neuroplasticity</h4>
+              <p style="margin: 0; color: #666; line-height: 1.5;">The brain can develop new neural pathways for executive function skills at any age</p>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+              <div style="font-size: 2.5rem; margin-bottom: 10px;">📈</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px;">Skill Transfer</h4>
+              <p style="margin: 0; color: #666; line-height: 1.5;">Executive function skills learned in one context transfer to academic, work, and life situations</p>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+              <div style="font-size: 2.5rem; margin-bottom: 10px;">💪</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px;">Self-Efficacy</h4>
+              <p style="margin: 0; color: #666; line-height: 1.5;">Students gain confidence and independence as they master essential life skills</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Business Model -->
+    <div class="slide">
+        <h2>Business Model & Revenue Streams</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+          <!-- B2C Individual Services -->
+          <div style="background: linear-gradient(135deg, #e3f2fd, #f8f9fa); border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+            <h3 style="color: #1e88e5; margin-bottom: 20px; text-align: center;">🎯 B2C Individual Services</h3>
+            <div style="margin-bottom: 20px;">
+              <h4 style="color: #333; margin-bottom: 10px;">1:1 Executive Function Coaching</h4>
+              <ul style="margin: 0; padding-left: 20px; color: #555;">
+                <li><strong>Middle/High School:</strong> $150-200/session (weekly)</li>
+                <li><strong>College Students:</strong> $175-225/session (bi-weekly)</li>
+                <li><strong>Young Adults:</strong> $200-250/session (flexible)</li>
+              </ul>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <h4 style="color: #333; margin-bottom: 10px;">Group Programs</h4>
+              <ul style="margin: 0; padding-left: 20px; color: #555;">
+                <li><strong>Study Skills Workshops:</strong> $75/student (4-week programs)</li>
+                <li><strong>Summer Boot Camps:</strong> $500/student (2-week intensive)</li>
+              </ul>
+            </div>
+            <div style="background: #1e88e5; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600;">
+              Average Annual Revenue per Client: $4,800-7,200
+            </div>
+          </div>
+
+          <!-- B2B Services -->
+          <div style="background: linear-gradient(135deg, #f0f9ff, #ecfdf5); border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+            <h3 style="color: #4ecdc4; margin-bottom: 20px; text-align: center;">🏢 B2B Partnership Services</h3>
+            <div style="margin-bottom: 20px;">
+              <h4 style="color: #333; margin-bottom: 10px;">School District Contracts</h4>
+              <ul style="margin: 0; padding-left: 20px; color: #555;">
+                <li><strong>Professional Development:</strong> $2,500/day workshops</li>
+                <li><strong>Curriculum Development:</strong> $15,000-25,000/program</li>
+                <li><strong>Consulting Services:</strong> $150/hour</li>
+              </ul>
+            </div>
+            <div style="margin-bottom: 15px;">
+              <h4 style="color: #333; margin-bottom: 10px;">Corporate Training</h4>
+              <ul style="margin: 0; padding-left: 20px; color: #555;">
+                <li><strong>Executive Function Workshops:</strong> $5,000/session</li>
+                <li><strong>Employee Coaching Programs:</strong> $8,000-12,000/quarter</li>
+              </ul>
+            </div>
+            <div style="background: #4ecdc4; color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600;">
+              Target: 20% of revenue from B2B by Year 2
+            </div>
+          </div>
+        </div>
+
+        <!-- Revenue Model Overview -->
+        <div style="background: white; border-radius: 16px; padding: 25px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-left: 4px solid #1e88e5;">
+          <h3 style="color: #1e88e5; margin-bottom: 20px; text-align: center;">📊 Revenue Model Fundamentals</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div style="text-align: center; padding: 15px;">
+              <div style="font-size: 2rem; font-weight: 700; color: #1e88e5; margin-bottom: 8px;">85%</div>
+              <div style="font-size: 0.9rem; color: #666;">Recurring Revenue Model</div>
+              <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">Weekly/bi-weekly sessions</div>
+            </div>
+            <div style="text-align: center; padding: 15px;">
+              <div style="font-size: 2rem; font-weight: 700; color: #4ecdc4; margin-bottom: 8px;">$230</div>
+              <div style="font-size: 0.9rem; color: #666;">Average Hourly Rate</div>
+              <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">Market competitive pricing</div>
+            </div>
+            <div style="text-align: center; padding: 15px;">
+              <div style="font-size: 2rem; font-weight: 700; color: #ff6b6b; margin-bottom: 8px;">75%</div>
+              <div style="font-size: 0.9rem; color: #666;">Gross Margins</div>
+              <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">Service-based model</div>
+            </div>
+            <div style="text-align: center; padding: 15px;">
+              <div style="font-size: 2rem; font-weight: 700; color: #f59e0b; margin-bottom: 8px;">18mo</div>
+              <div style="font-size: 0.9rem; color: #666;">Average Client Retention</div>
+              <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">High lifetime value</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market Positioning -->
+        <div style="display: flex; gap: 20px; margin-top: 30px;">
+          <div style="flex: 1; background: linear-gradient(135deg, #fef3e2, #fdf2f8); border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #dc2626; margin-bottom: 15px; text-align: center;">🎯 Target Demographics</h4>
+            <ul style="margin: 0; padding-left: 20px; color: #555; line-height: 1.6;">
+              <li><strong>Primary:</strong> Affluent families ($75K+ household income)</li>
+              <li><strong>Students:</strong> Grades 7-12, college students with EF challenges</li>
+              <li><strong>Geography:</strong> Charleston metro area, expanding to Southeast</li>
+              <li><strong>Psychographics:</strong> Education-focused families seeking specialized support</li>
+            </ul>
+          </div>
+          <div style="flex: 1; background: linear-gradient(135deg, #f0fdf4, #ecfdf5); border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #059669; margin-bottom: 15px; text-align: center;">💡 Competitive Advantages</h4>
+            <ul style="margin: 0; padding-left: 20px; color: #555; line-height: 1.6;">
+              <li><strong>Specialization:</strong> EF-only focus vs. general tutoring</li>
+              <li><strong>Methodology:</strong> Evidence-based coaching techniques</li>
+              <li><strong>Technology:</strong> Progress tracking and family engagement tools</li>
+              <li><strong>Outcomes:</strong> Measurable skill development vs. grades only</li>
+            </ul>
+          </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Market & Segments -->
+    <div class="slide">
+        <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Market Opportunity</h2>
+        
+        <!-- Market Size Overview -->
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 40px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+          <h3 style="margin: 0 0 25px 0; font-size: 2rem; font-weight: 700;">Total Addressable Market Size</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px;">
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 25px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-size: 3rem; font-weight: 700; margin-bottom: 10px;" data-value="2.8" data-label="TAM (US, $B)">$2.8B</div>
+              <div style="font-size: 1.1rem; font-weight: 600; opacity: 0.9;">Total Addressable Market</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">US Educational Services</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 25px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-size: 3rem; font-weight: 700; margin-bottom: 10px;" data-value="450" data-label="SAM (US, $M)">$450M</div>
+              <div style="font-size: 1.1rem; font-weight: 600; opacity: 0.9;">Serviceable Available Market</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">EF Coaching & Training</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 25px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+              <div style="font-size: 3rem; font-weight: 700; margin-bottom: 10px;" data-value="15" data-label="SOM (US, $M)">$15M</div>
+              <div style="font-size: 1.1rem; font-weight: 600; opacity: 0.9;">Serviceable Obtainable Market</div>
+              <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">Target Segments</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Market Segments -->
+        <div style="margin-bottom: 35px;">
+          <h3 style="text-align: center; color: #1e88e5; margin-bottom: 25px; font-size: 1.8rem;">Target Market Segments</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;">
+            <div style="background: linear-gradient(135deg, #1e88e5, #1976d2); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(30, 136, 229, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(30, 136, 229, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(30, 136, 229, 0.15)'">
+              <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                  <div style="font-size: 2rem;">🎓</div>
+                </div>
+                <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Middle & High School (6-12)</h4>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">6.7M</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">students with ADHD/LD in US public schools</div>
+              </div>
+              <p style="margin: 0; line-height: 1.6; opacity: 0.95;">Critical years for developing independence and college-readiness. High parental investment in academic success.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(78, 205, 196, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(78, 205, 196, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(78, 205, 196, 0.15)'">
+              <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                  <div style="font-size: 2rem;">🏫</div>
+                </div>
+                <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">College Students</h4>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">19%</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">of undergraduates report EF challenges</div>
+              </div>
+              <p style="margin: 0; line-height: 1.6; opacity: 0.95;">Increased academic demands and independence requirements. Campus disability services seeking specialized support.</p>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border-radius: 16px; padding: 25px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(245, 158, 11, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.15)'">
+              <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                  <div style="font-size: 2rem;">💼</div>
+                </div>
+                <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">Working Adults</h4>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.1); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">10M+</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">US adults seek productivity & EF support</div>
+              </div>
+              <p style="margin: 0; line-height: 1.6; opacity: 0.95;">Growing workplace demands for executive function skills. Remote work increasing need for self-management.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market Visualization -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; border-left: 6px solid #1e88e5; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); text-align: center;">
+          <h3 style="color: #1e88e5; margin-bottom: 25px; font-size: 1.6rem;">Market Size Breakdown</h3>
+          <canvas id="marketDonut" width="320" height="180" style="margin: 0 auto; display: block;"></canvas>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 25px;">
+            <div style="background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+              <div style="width: 12px; height: 12px; background: #1e88e5; border-radius: 50%; margin: 0 auto 8px;"></div>
+              <div style="font-weight: 600; color: #333;">TAM</div>
+              <div style="font-size: 0.9rem; color: #666;">Total Market</div>
+            </div>
+            <div style="background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+              <div style="width: 12px; height: 12px; background: #4ecdc4; border-radius: 50%; margin: 0 auto 8px;"></div>
+              <div style="font-weight: 600; color: #333;">SAM</div>
+              <div style="font-size: 0.9rem; color: #666;">Serviceable Market</div>
+            </div>
+            <div style="background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+              <div style="width: 12px; height: 12px; background: #f59e0b; border-radius: 50%; margin: 0 auto 8px;"></div>
+              <div style="font-weight: 600; color: #333;">SOM</div>
+              <div style="font-size: 0.9rem; color: #666;">Target Market</div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Competition -->
+    <div class="slide">
+        <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Competitive Landscape</h2>
+        
+        <!-- Competitive Positioning Header -->
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 30px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+          <h3 style="margin: 0 0 15px 0; font-size: 1.8rem; font-weight: 700;">Our Competitive Advantage</h3>
+          <p style="font-size: 1.1rem; margin: 0; line-height: 1.6; opacity: 0.95;">
+            Specialized focus, proven methodology, and comprehensive support ecosystem
+          </p>
+        </div>
+
+        <!-- Competitive Comparison Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 35px;">
+          
+          <!-- Adapt Education (Our Solution) -->
+          <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15); transition: all 0.3s ease; cursor: pointer; position: relative;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(16, 185, 129, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(16, 185, 129, 0.15)'">
+            <div style="position: absolute; top: -10px; right: 15px; background: #fbbf24; color: #1f2937; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">OUR SOLUTION</div>
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+              <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                <div style="font-size: 2rem;">🎯</div>
+              </div>
+              <h4 style="margin: 0; font-size: 1.4rem; font-weight: 700;">Adapt Education</h4>
+            </div>
+            <ul style="margin: 0; padding-left: 0; list-style: none;">
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ffffff; margin-right: 10px; font-size: 1.2rem;">✓</span>Personalized, in-person & virtual EF coaching</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ffffff; margin-right: 10px; font-size: 1.2rem;">✓</span>Data-driven progress tracking & analytics</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ffffff; margin-right: 10px; font-size: 1.2rem;">✓</span>Comprehensive family & school collaboration</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ffffff; margin-right: 10px; font-size: 1.2rem;">✓</span>Certified, experienced EF specialists</li>
+              <li style="display: flex; align-items: center; margin-bottom: 0; opacity: 0.95;"><span style="color: #ffffff; margin-right: 10px; font-size: 1.2rem;">✓</span>Evidence-based methodology & outcomes</li>
+            </ul>
+          </div>
+
+          <!-- National Tutoring Chains -->
+          <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(245, 158, 11, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+              <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                <div style="font-size: 2rem;">🏢</div>
+              </div>
+              <h4 style="margin: 0; font-size: 1.4rem; font-weight: 700;">National Tutoring Chains</h4>
+            </div>
+            <ul style="margin: 0; padding-left: 0; list-style: none;">
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Standardized, one-size-fits-all programs</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Limited executive function specialization</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #fbbf24; margin-right: 10px; font-size: 1.2rem;">~</span>Primarily virtual delivery model</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Minimal family/school integration</li>
+              <li style="display: flex; align-items: center; margin-bottom: 0; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Focus on subject content vs. skills</li>
+            </ul>
+          </div>
+
+          <!-- Independent Tutors -->
+          <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15); transition: all 0.3s ease; cursor: pointer;" tabindex="0" onmouseover="this.style.transform='translateY(-8px) scale(1.02)'; this.style.boxShadow='0 15px 40px rgba(139, 92, 246, 0.25)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(139, 92, 246, 0.15)'">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+              <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 12px; margin-right: 15px;">
+                <div style="font-size: 2rem;">👤</div>
+              </div>
+              <h4 style="margin: 0; font-size: 1.4rem; font-weight: 700;">Independent Tutors</h4>
+            </div>
+            <ul style="margin: 0; padding-left: 0; list-style: none;">
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Highly variable quality & experience</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Limited or no progress tracking</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Inconsistent family collaboration</li>
+              <li style="display: flex; align-items: center; margin-bottom: 12px; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>Often lack EF certification & training</li>
+              <li style="display: flex; align-items: center; margin-bottom: 0; opacity: 0.95;"><span style="color: #ef4444; margin-right: 10px; font-size: 1.2rem;">×</span>No systematic methodology</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Key Differentiators -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; border-left: 6px solid #1e88e5; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+          <h3 style="color: #1e88e5; margin-bottom: 25px; font-size: 1.6rem; text-align: center;">Why Families Choose Adapt Education</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+              <div style="font-size: 2.5rem; margin-bottom: 15px;">🎯</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px; font-size: 1.1rem;">EF Specialization</h4>
+              <p style="margin: 0; color: #666; line-height: 1.5; font-size: 0.95rem;">100% focus on executive function skills, not general tutoring</p>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+              <div style="font-size: 2.5rem; margin-bottom: 15px;">📊</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px; font-size: 1.1rem;">Measurable Outcomes</h4>
+              <p style="margin: 0; color: #666; line-height: 1.5; font-size: 0.95rem;">Data-driven progress tracking with clear skill development metrics</p>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+              <div style="font-size: 2.5rem; margin-bottom: 15px;">🤝</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px; font-size: 1.1rem;">Holistic Support</h4>
+              <p style="margin: 0; color: #666; line-height: 1.5; font-size: 0.95rem;">Family and school collaboration for consistent skill reinforcement</p>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+              <div style="font-size: 2.5rem; margin-bottom: 15px;">🏆</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px; font-size: 1.1rem;">Proven Expertise</h4>
+              <p style="margin: 0; color: #666; line-height: 1.5; font-size: 0.95rem;">Certified coaches with specialized EF training and experience</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Go-to-Market -->
+    <div class="slide">
+        <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Go-to-Market Strategy: Charleston, SC</h2>
+        
+        <!-- Market Context Header -->
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 30px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+          <h3 style="margin: 0 0 15px 0; font-size: 1.8rem; font-weight: 700;">Charleston Market Opportunity</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">156K</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">Students K-12 in Tri-County Area</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">$89K</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">Median Household Income</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">12+</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">Higher Education Institutions</div>
+            </div>
+            <div style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 15px;">
+              <div style="font-size: 1.8rem; font-weight: 700; margin-bottom: 5px;">64%</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">College-Educated Adults</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phase-Based Strategy -->
+        <div style="margin-bottom: 35px;">
+          <h3 style="text-align: center; color: #1e88e5; margin-bottom: 25px; font-size: 1.6rem;">3-Phase Launch Strategy</h3>
+          
+          <!-- Phase 1: Foundation (Months 1-6) -->
+          <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #1e88e5; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+              <div style="background: #1e88e5; color: white; border-radius: 50%; padding: 15px; margin-right: 15px; min-width: 50px; text-align: center; font-weight: 700; font-size: 1.2rem;">1</div>
+              <div>
+                <h4 style="margin: 0; color: #1e88e5; font-size: 1.3rem;">Foundation Phase (Months 1-6)</h4>
+                <p style="margin: 5px 0 0 0; color: #666; font-size: 1rem;">Establish credibility and build local network</p>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+              <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                <h5 style="color: #1e88e5; margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center;">
+                  <span style="margin-right: 8px;">🏫</span> School District Partnerships
+                </h5>
+                <ul style="margin: 0; padding-left: 20px; color: #333; line-height: 1.5;">
+                  <li><strong>Charleston County Schools:</strong> Partner with special education coordinators</li>
+                  <li><strong>Private Schools:</strong> Ashley Hall, Porter-Gaud, Charleston Collegiate</li>
+                  <li><strong>Target:</strong> 504 coordinators and counseling departments</li>
+                </ul>
+              </div>
+              <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                <h5 style="color: #1e88e5; margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center;">
+                  <span style="margin-right: 8px;">🩺</span> Healthcare Networks
+                </h5>
+                <ul style="margin: 0; padding-left: 20px; color: #333; line-height: 1.5;">
+                  <li><strong>MUSC Pediatrics:</strong> Developmental specialists</li>
+                  <li><strong>Roper St. Francis:</strong> Child psychology departments</li>
+                  <li><strong>Private Practices:</strong> ADHD/learning specialists in Mt. Pleasant & Summerville</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 2: Growth (Months 6-12) -->
+          <div style="background: linear-gradient(135deg, #f0f9ff, #ecfdf5); border-radius: 16px; padding: 25px; margin-bottom: 25px; border-left: 6px solid #4ecdc4; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+              <div style="background: #4ecdc4; color: white; border-radius: 50%; padding: 15px; margin-right: 15px; min-width: 50px; text-align: center; font-weight: 700; font-size: 1.2rem;">2</div>
+              <div>
+                <h4 style="margin: 0; color: #4ecdc4; font-size: 1.3rem;">Growth Phase (Months 6-12)</h4>
+                <p style="margin: 5px 0 0 0; color: #666; font-size: 1rem;">Scale operations and diversify client base</p>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+              <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                <h5 style="color: #4ecdc4; margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center;">
+                  <span style="margin-right: 8px;">🎓</span> College Market
+                </h5>
+                <ul style="margin: 0; padding-left: 20px; color: #333; line-height: 1.5;">
+                  <li><strong>College of Charleston:</strong> Disability services partnership</li>
+                  <li><strong>Citadel:</strong> Academic support for cadets</li>
+                  <li><strong>Trident Tech:</strong> Community college student support</li>
+                  <li><strong>MUSC:</strong> Medical/dental student coaching</li>
+                </ul>
+              </div>
+              <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                <h5 style="color: #4ecdc4; margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center;">
+                  <span style="margin-right: 8px;">🏢</span> Corporate Partnerships
+                </h5>
+                <ul style="margin: 0; padding-left: 20px; color: #333; line-height: 1.5;">
+                  <li><strong>Boeing Charleston:</strong> Employee wellness programs</li>
+                  <li><strong>SPAWAR/Navy:</strong> Military family support</li>
+                  <li><strong>Local Tech:</strong> BoomTown, PeopleMatter alumni companies</li>
+                  <li><strong>Healthcare:</strong> MUSC, Roper employee benefits</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 3: Expansion (Year 2+) -->
+          <div style="background: linear-gradient(135deg, #fef3e2, #fde68a); border-radius: 16px; padding: 25px; border-left: 6px solid #f59e0b; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+              <div style="background: #f59e0b; color: white; border-radius: 50%; padding: 15px; margin-right: 15px; min-width: 50px; text-align: center; font-weight: 700; font-size: 1.2rem;">3</div>
+              <div>
+                <h4 style="margin: 0; color: #f59e0b; font-size: 1.3rem;">Expansion Phase (Year 2+)</h4>
+                <p style="margin: 5px 0 0 0; color: #666; font-size: 1rem;">Regional leadership and premium services</p>
+              </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+              <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                <h5 style="color: #f59e0b; margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center;">
+                  <span style="margin-right: 8px;">🌟</span> Premium Services
+                </h5>
+                <ul style="margin: 0; padding-left: 20px; color: #333; line-height: 1.5;">
+                  <li><strong>Executive Coaching:</strong> High-net-worth family programs</li>
+                  <li><strong>Intensive Retreats:</strong> Summer boot camps on Daniel Island</li>
+                  <li><strong>Family Coaching:</strong> Comprehensive household organization</li>
+                </ul>
+              </div>
+              <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                <h5 style="color: #f59e0b; margin-bottom: 12px; font-size: 1.1rem; display: flex; align-items: center;">
+                  <span style="margin-right: 8px;">📍</span> Geographic Expansion
+                </h5>
+                <ul style="margin: 0; padding-left: 20px; color: #333; line-height: 1.5;">
+                  <li><strong>Satellite Locations:</strong> Mt. Pleasant, Summerville</li>
+                  <li><strong>Regional Markets:</strong> Columbia, Greenville, Savannah</li>
+                  <li><strong>Virtual Services:</strong> Lowcountry rural communities</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marketing Strategy -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; border-left: 6px solid #1e88e5; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+          <h3 style="color: #1e88e5; margin-bottom: 25px; font-size: 1.6rem; text-align: center;">Charleston-Specific Marketing Approach</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(30, 136, 229, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+              <div style="font-size: 2.5rem; margin-bottom: 15px; text-align: center;">🎪</div>
+              <h4 style="color: #1e88e5; margin-bottom: 10px; text-align: center;">Community Events</h4>
+              <ul style="margin: 0; padding-left: 15px; color: #666; line-height: 1.5; font-size: 0.95rem;">
+                <li>Spoleto Festival education sessions</li>
+                <li>Kiawah Island learning workshops</li>
+                <li>Daniel Island family events</li>
+                <li>West Ashley community centers</li>
+              </ul>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(78, 205, 196, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+              <div style="font-size: 2.5rem; margin-bottom: 15px; text-align: center;">📱</div>
+              <h4 style="color: #4ecdc4; margin-bottom: 10px; text-align: center;">Digital Presence</h4>
+              <ul style="margin: 0; padding-left: 15px; color: #666; line-height: 1.5; font-size: 0.95rem;">
+                <li>Charleston Mom Facebook groups</li>
+                <li>Nextdoor neighborhood targeting</li>
+                <li>Google Ads: "ADHD help Charleston"</li>
+                <li>LinkedIn: Local professionals</li>
+              </ul>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+              <div style="font-size: 2.5rem; margin-bottom: 15px; text-align: center;">🤝</div>
+              <h4 style="color: #f59e0b; margin-bottom: 10px; text-align: center;">Referral Network</h4>
+              <ul style="margin: 0; padding-left: 15px; color: #666; line-height: 1.5; font-size: 0.95rem;">
+                <li>Educational consultants</li>
+                <li>Learning disability specialists</li>
+                <li>Private tutoring companies</li>
+                <li>Child psychologists/psychiatrists</li>
+              </ul>
+            </div>
+            <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(139, 92, 246, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+              <div style="font-size: 2.5rem; margin-bottom: 15px; text-align: center;">🎯</div>
+              <h4 style="color: #8b5cf6; margin-bottom: 10px; text-align: center;">Content Marketing</h4>
+              <ul style="margin: 0; padding-left: 15px; color: #666; line-height: 1.5; font-size: 0.95rem;">
+                <li>Charleston Parent Magazine</li>
+                <li>Lowcountry Parent blog</li>
+                <li>CofC & Citadel parent publications</li>
+                <li>Local podcast sponsorships</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    <!-- Slide 8: Financials -->
+    <div class="slide">
+      <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Financial Projections (3–5 Years)</h2>
+      
+      <!-- Financial Overview Header -->
+      <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 30px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+        <h3 style="margin: 0 0 15px 0; font-size: 1.8rem; font-weight: 700;">Revenue Growth Projections</h3>
+        <p style="font-size: 1.1rem; margin: 0; line-height: 1.6; opacity: 0.95;">
+          Multiple scenarios based on market penetration, B2B expansion, and Charleston market conditions
+        </p>
+      </div>
+
+      <!-- Enhanced Scenario Buttons -->
+      <div class="scenario-buttons" style="display: flex; gap: 15px; justify-content: center; margin: 30px 0;">
+        <button data-scenario="conservative" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 12px; padding: 15px 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); min-width: 140px;">
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <span style="margin-right: 8px;">📈</span>
+            Conservative
+          </div>
+        </button>
+        <button data-scenario="base" class="active" style="background: linear-gradient(135deg, #1e88e5, #4ecdc4); color: white; border: none; border-radius: 12px; padding: 15px 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3); min-width: 140px;">
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <span style="margin-right: 8px;">🎯</span>
+            Base Case
+          </div>
+        </button>
+        <button data-scenario="aggressive" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 12px; padding: 15px 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); min-width: 140px;">
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <span style="margin-right: 8px;">🚀</span>
+            Aggressive
+          </div>
+        </button>
+      </div>
+
+      <!-- Conservative Scenario -->
+      <div id="conservative" class="scenario-content" style="background: linear-gradient(135deg, #f8f9fa, #fef3e2); border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); border-left: 6px solid #f59e0b;">
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+          <div style="background: #f59e0b; color: white; border-radius: 50%; padding: 15px; margin-right: 15px;">
+            <span style="font-size: 1.5rem;">📈</span>
+          </div>
+          <div>
+            <h3 style="margin: 0; color: #f59e0b; font-size: 1.6rem; font-weight: 700;">Conservative Growth Model</h3>
+            <p style="margin: 5px 0 0 0; color: #666; font-size: 1rem;">Steady, sustainable expansion with proven strategies</p>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start;">
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <div class="chart-container financial-chart">
+              <canvas id="conservativeChart"></canvas>
+            </div>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #f59e0b; margin-bottom: 15px; font-size: 1.2rem;">Key Assumptions</h4>
+            <div style="display: grid; gap: 12px;">
+              <div style="display: flex; align-items: center; padding: 10px; background: #fef3e2; border-radius: 8px;">
+                <div style="background: #f59e0b; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">1</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">Organic Growth Focus</div>
+                  <div style="color: #666; font-size: 0.8rem;">Word-of-mouth & referrals</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; padding: 10px; background: #fef3e2; border-radius: 8px;">
+                <div style="background: #f59e0b; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">2</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">Limited B2B</div>
+                  <div style="color: #666; font-size: 0.8rem;">Individual clients priority</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; padding: 10px; background: #fef3e2; border-radius: 8px;">
+                <div style="background: #f59e0b; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">3</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">Profitability Focus</div>
+                  <div style="color: #666; font-size: 0.8rem;">Sustainable margins</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: rgba(245, 158, 11, 0.1); border-radius: 12px; padding: 20px; margin-top: 25px;">
+          <p style="margin: 0; color: #333; line-height: 1.6; font-size: 1rem;">
+            <strong>Conservative Projection:</strong> Assumes steady, organic growth with moderate market penetration and a focus on profitability. 
+            Year 3 revenue target of $400K with strong unit economics and sustainable operations.
+          </p>
+        </div>
+      </div>
+
+      <!-- Base Case Scenario -->
+      <div id="base" class="scenario-content active" style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); border-left: 6px solid #1e88e5;">
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+          <div style="background: #1e88e5; color: white; border-radius: 50%; padding: 15px; margin-right: 15px;">
+            <span style="font-size: 1.5rem;">🎯</span>
+          </div>
+          <div>
+            <h3 style="margin: 0; color: #1e88e5; font-size: 1.6rem; font-weight: 700;">Base Case Growth Model</h3>
+            <p style="margin: 5px 0 0 0; color: #666; font-size: 1rem;">Expected growth based on market trends and partnerships</p>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start;">
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <div class="chart-container financial-chart">
+              <canvas id="baseChart"></canvas>
+            </div>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #1e88e5; margin-bottom: 15px; font-size: 1.2rem;">Key Assumptions</h4>
+            <div style="display: grid; gap: 12px;">
+              <div style="display: flex; align-items: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                <div style="background: #1e88e5; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">1</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">School Partnerships</div>
+                  <div style="color: #666; font-size: 0.8rem;">Charleston County & private</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                <div style="background: #1e88e5; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">2</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">Digital Marketing</div>
+                  <div style="color: #666; font-size: 0.8rem;">Local SEO & social media</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; padding: 10px; background: #e3f2fd; border-radius: 8px;">
+                <div style="background: #1e88e5; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">3</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">B2B Services</div>
+                  <div style="color: #666; font-size: 0.8rem;">Corporate & college partnerships</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: rgba(30, 136, 229, 0.1); border-radius: 12px; padding: 20px; margin-top: 25px;">
+          <p style="margin: 0; color: #333; line-height: 1.6; font-size: 1rem;">
+            <strong>Base Case Projection:</strong> Reflects expected growth based on current market trends, planned marketing efforts, and successful school partnerships. 
+            Year 3 revenue target of $700K with balanced B2C and B2B revenue streams.
+          </p>
+        </div>
+      </div>
+
+      <!-- Aggressive Scenario -->
+      <div id="aggressive" class="scenario-content" style="background: linear-gradient(135deg, #f8f9fa, #ecfdf5); border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); border-left: 6px solid #10b981;">
+        <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+          <div style="background: #10b981; color: white; border-radius: 50%; padding: 15px; margin-right: 15px;">
+            <span style="font-size: 1.5rem;">🚀</span>
+          </div>
+          <div>
+            <h3 style="margin: 0; color: #10b981; font-size: 1.6rem; font-weight: 700;">Aggressive Growth Model</h3>
+            <p style="margin: 5px 0 0 0; color: #666; font-size: 1rem;">Rapid expansion with B2B focus and geographic scaling</p>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start;">
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <div class="chart-container financial-chart">
+              <canvas id="aggressiveChart"></canvas>
+            </div>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #10b981; margin-bottom: 15px; font-size: 1.2rem;">Key Assumptions</h4>
+            <div style="display: grid; gap: 12px;">
+              <div style="display: flex; align-items: center; padding: 10px; background: #ecfdf5; border-radius: 8px;">
+                <div style="background: #10b981; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">1</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">Rapid B2B Growth</div>
+                  <div style="color: #666; font-size: 0.8rem;">Corporate training programs</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; padding: 10px; background: #ecfdf5; border-radius: 8px;">
+                <div style="background: #10b981; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">2</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">Geographic Expansion</div>
+                  <div style="color: #666; font-size: 0.8rem;">Columbia, Greenville markets</div>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; padding: 10px; background: #ecfdf5; border-radius: 8px;">
+                <div style="background: #10b981; color: white; border-radius: 50%; padding: 5px; margin-right: 10px; min-width: 30px; text-align: center; font-size: 0.8rem; font-weight: 700;">3</div>
+                <div>
+                  <div style="font-weight: 600; color: #333; font-size: 0.9rem;">Premium Services</div>
+                  <div style="color: #666; font-size: 0.8rem;">High-value family programs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: rgba(16, 185, 129, 0.1); border-radius: 12px; padding: 20px; margin-top: 25px;">
+          <p style="margin: 0; color: #333; line-height: 1.6; font-size: 1rem;">
+            <strong>Aggressive Projection:</strong> High-growth model assuming rapid customer acquisition, successful B2B service launch, and potential geographic expansion. 
+            Year 3 revenue target of $1.2M with multiple revenue streams and regional presence.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: Team -->
+    <div class="slide">
+      <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Meet Our Team</h2>
+      
+      <!-- Team Introduction -->
+      <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 30px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+        <h3 style="margin: 0 0 15px 0; font-size: 1.8rem; font-weight: 700;">Experienced Educators & Coaches</h3>
+        <p style="font-size: 1.1rem; margin: 0; line-height: 1.6; opacity: 0.95;">
+          Our founding team combines decades of educational experience with proven business acumen and specialized executive function expertise
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 35px; margin-bottom: 35px;">
+        <!-- Maxwell Greenberg Card -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 20px; padding: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 40px rgba(30, 136, 229, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0, 0, 0, 0.08)'">
+          <!-- Header Section -->
+          <div style="background: linear-gradient(135deg, #1e88e5, #4ecdc4); color: white; border-radius: 16px; padding: 25px; margin-bottom: 25px; text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
+              <div style="background: rgba(255, 255, 255, 0.15); border-radius: 50%; padding: 10px;">
+                <img src="https://res.cloudinary.com/davwtxoeo/image/upload/v1747878491/MGhs_jzwopb.jpg" alt="Maxwell Greenberg" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255, 255, 255, 0.3);">
+              </div>
+              <div style="text-align: left;">
+                <h3 style="margin: 0 0 8px 0; font-size: 1.6rem; font-weight: 700;">Maxwell Greenberg</h3>
+                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 6px 12px; font-size: 1rem; font-weight: 600; display: inline-block;">Co-Founder & Coach</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Background -->
+          <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #1e88e5; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center;">
+              <span style="background: #1e88e5; color: white; border-radius: 50%; padding: 8px; margin-right: 10px; font-size: 0.9rem;">👨‍🏫</span>
+              Professional Background
+            </h4>
+            <p style="color: #333; line-height: 1.6; margin-bottom: 15px; font-size: 1rem;">
+              Max brings <strong>five years of high school teaching experience</strong> and <strong>three years as a senior executive functioning coach</strong>. His extensive educational background provides a unique foundation for delivering personalized student support that addresses both academic content and the underlying skills needed for independent learning.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 15px;">
+              <div style="background: #e3f2fd; border-radius: 8px; padding: 10px; text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #1e88e5;">5</div>
+                <div style="font-size: 0.85rem; color: #666;">Years Teaching</div>
+              </div>
+              <div style="background: #e0f7fa; border-radius: 8px; padding: 10px; text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #4ecdc4;">3</div>
+                <div style="font-size: 0.85rem; color: #666;">Years EF Coaching</div>
+              </div>
+              <div style="background: #fff3e0; border-radius: 8px; padding: 10px; text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #f59e0b;">3</div>
+                <div style="font-size: 0.85rem; color: #666;">Graduate Degrees</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #1e88e5; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center;">
+              <span style="background: #1e88e5; color: white; border-radius: 50%; padding: 8px; margin-right: 10px; font-size: 0.9rem;">🎓</span>
+              Education
+            </h4>
+            <div style="display: grid; gap: 10px;">
+              <div style="background: #f8f9fa; border-left: 4px solid #1e88e5; border-radius: 8px; padding: 12px;">
+                <div style="font-weight: 600; color: #333; font-size: 1rem;">M.A., History</div>
+                <div style="color: #666; font-size: 0.9rem;">University of Wisconsin-Madison</div>
+              </div>
+              <div style="background: #f8f9fa; border-left: 4px solid #4ecdc4; border-radius: 8px; padding: 12px;">
+                <div style="font-weight: 600; color: #333; font-size: 1rem;">M.A., Social Studies Education</div>
+                <div style="color: #666; font-size: 0.9rem;">Boston University</div>
+              </div>
+              <div style="background: #f8f9fa; border-left: 4px solid #f59e0b; border-radius: 8px; padding: 12px;">
+                <div style="font-weight: 600; color: #333; font-size: 1rem;">B.A., History</div>
+                <div style="color: #666; font-size: 0.9rem;">University of Pittsburgh</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ashley L. Wood Card -->
+        <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 20px; padding: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 40px rgba(78, 205, 196, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0, 0, 0, 0.08)'">
+          <!-- Header Section -->
+          <div style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; border-radius: 16px; padding: 25px; margin-bottom: 25px; text-align: center;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 20px;">
+              <div style="background: rgba(255, 255, 255, 0.15); border-radius: 50%; padding: 10px;">
+                <img src="https://res.cloudinary.com/davwtxoeo/image/upload/v1747853791/ahsley_h6f1z5.jpg" alt="Ashley L. Wood" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255, 255, 255, 0.3);">
+              </div>
+              <div style="text-align: left;">
+                <h3 style="margin: 0 0 8px 0; font-size: 1.6rem; font-weight: 700;">Ashley L. Wood</h3>
+                <div style="background: rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 6px 12px; font-size: 1rem; font-weight: 600; display: inline-block;">Co-Founder, Head of Marketing, & Coach</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Professional Background -->
+          <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #4ecdc4; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center;">
+              <span style="background: #4ecdc4; color: white; border-radius: 50%; padding: 8px; margin-right: 10px; font-size: 0.9rem;">📈</span>
+              Professional Background
+            </h4>
+            <p style="color: #333; line-height: 1.6; margin-bottom: 12px; font-size: 1rem;">
+              Ashley is a <strong>creative and strategic marketing professional</strong> who has led outreach campaigns that helped an educational services company scale their EF program to <strong>nearly $700,000 ARR</strong> in the past two years.
+            </p>
+            <p style="color: #333; line-height: 1.6; margin-bottom: 12px; font-size: 1rem;">
+              In addition to her marketing and design experience, she worked as a <strong>high school English and Art teacher for seven years</strong>, bringing both educational expertise and business acumen to Adapt Education.
+            </p>
+            <p style="color: #333; line-height: 1.6; margin-bottom: 15px; font-size: 1rem;">
+              Concurrent with her teaching career, she worked as a <strong>high school arts programming curriculum designer</strong> and led professional development for teachers throughout New England.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 15px;">
+              <div style="background: #e0f7fa; border-radius: 8px; padding: 10px; text-align: center;">
+                <div style="font-size: 1.3rem; font-weight: 700; color: #4ecdc4;">$700K</div>
+                <div style="font-size: 0.85rem; color: #666;">ARR Scaled</div>
+              </div>
+              <div style="background: #e3f2fd; border-radius: 8px; padding: 10px; text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #1e88e5;">7</div>
+                <div style="font-size: 0.85rem; color: #666;">Years Teaching</div>
+              </div>
+              <div style="background: #fff3e0; border-radius: 8px; padding: 10px; text-align: center;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: #f59e0b;">✓</div>
+                <div style="font-size: 0.85rem; color: #666;">Curriculum Design</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+            <h4 style="color: #4ecdc4; margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center;">
+              <span style="background: #4ecdc4; color: white; border-radius: 50%; padding: 8px; margin-right: 10px; font-size: 0.9rem;">🎓</span>
+              Education
+            </h4>
+            <div style="display: grid; gap: 12px;">
+              <div style="background: #f8f9fa; border-left: 4px solid #4ecdc4; border-radius: 8px; padding: 12px;">
+                <div style="font-weight: 600; color: #333; font-size: 1rem;">M.F.A.</div>
+                <div style="color: #666; font-size: 0.9rem;">Tufts University</div>
+              </div>
+              <div style="background: #f8f9fa; border-left: 4px solid #1e88e5; border-radius: 8px; padding: 12px;">
+                <div style="font-weight: 600; color: #333; font-size: 1rem;">B.F.A.</div>
+                <div style="color: #666; font-size: 0.9rem;">Clemson University</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Strengths Summary -->
+      <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; border-left: 6px solid #1e88e5; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+        <h3 style="color: #1e88e5; margin-bottom: 25px; font-size: 1.6rem; text-align: center;">Combined Team Strengths</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🎓</div>
+            <h4 style="color: #1e88e5; margin-bottom: 10px;">12+ Years</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Combined teaching experience in secondary education</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🧠</div>
+            <h4 style="color: #1e88e5; margin-bottom: 10px;">EF Expertise</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Specialized training and certification in executive function coaching</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">📈</div>
+            <h4 style="color: #1e88e5; margin-bottom: 10px;">Proven Growth</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Track record of scaling educational programs to significant revenue</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center;">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🎯</div>
+            <h4 style="color: #1e88e5; margin-bottom: 10px;">Market Focus</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Deep understanding of student, family, and educator needs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Funding -->
+    <div class="slide">
+        <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Funding Ask & Use of Funds</h2>
+        
+        <!-- Funding Options Header -->
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 30px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+          <h3 style="margin: 0 0 15px 0; font-size: 1.8rem; font-weight: 700;">Investment Opportunity</h3>
+          <p style="font-size: 1.1rem; margin: 0; line-height: 1.6; opacity: 0.95;">
+            Choose your preferred investment approach to accelerate our growth and market impact
+          </p>
+        </div>
+
+        <!-- Funding Toggle Buttons -->
+        <div class="funding-buttons" style="display: flex; gap: 12px; justify-content: center; margin: 30px 0;">
+          <button onclick="showFundingContent('brick')" id="brick-btn" class="funding-button active" style="background: linear-gradient(135deg, #1e88e5, #1976d2); color: white; border: none; border-radius: 12px; padding: 15px 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(30, 136, 229, 0.3);">Brick and Mortar MVP Ask</button>
+          <button onclick="showFundingContent('lean')" id="lean-btn" class="funding-button" style="background: #f8f9fa; color: #1e88e5; border: 2px solid #e0e0e0; border-radius: 12px; padding: 15px 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Lean Ask</button>
+        </div>
+
+        <div id="funding-content">
+            <!-- Brick and Mortar Option -->
+            <div id="brick-content" class="funding-content active" style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); transition: all 0.3s ease;">
+                <div class="funding-details" style="display: flex; gap: 30px; align-items: flex-start;">
+                    <div style="flex: 1;">
+                        <div style="background: linear-gradient(135deg, #1e88e5, #4ecdc4); color: white; border-radius: 16px; padding: 25px; margin-bottom: 25px; text-align: center;">
+                          <h3 style="margin: 0 0 15px 0; font-size: 1.6rem; font-weight: 700;">Brick and Mortar MVP Ask</h3>
+                          <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 15px;">
+                            <div style="font-size: 3.5rem; font-weight: 700; margin-bottom: 5px;">$250K</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">Full-Scale Launch</div>
+                          </div>
+                        </div>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.6; margin-bottom: 25px;">To establish a flagship physical location and launch full-scale operations, capturing the local market for premium, in-person coaching.</p>
+                        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                            <h4 style="color: #1e88e5; margin-bottom: 15px; font-size: 1.3rem;">Use of Funds:</h4>
+                            <div style="display: grid; gap: 15px;">
+                                <div style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                                  <div style="background: #1e88e5; color: white; border-radius: 50%; padding: 8px; margin-right: 12px; min-width: 35px; text-align: center; font-weight: 700;">50%</div>
+                                  <div>
+                                    <div style="font-weight: 600; color: #333;">Physical Space Setup ($125,000)</div>
+                                    <div style="font-size: 0.9rem; color: #666;">Lease, renovation, furniture, and tech infrastructure</div>
+                                  </div>
+                                </div>
+                                <div style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                                  <div style="background: #4ecdc4; color: white; border-radius: 50%; padding: 8px; margin-right: 12px; min-width: 35px; text-align: center; font-weight: 700;">30%</div>
+                                  <div>
+                                    <div style="font-weight: 600; color: #333;">Operational Launch ($75,000)</div>
+                                    <div style="font-size: 0.9rem; color: #666;">Initial staffing, training, and marketing</div>
+                                  </div>
+                                </div>
+                                <div style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                                  <div style="background: #f59e0b; color: white; border-radius: 50%; padding: 8px; margin-right: 12px; min-width: 35px; text-align: center; font-weight: 700;">20%</div>
+                                  <div>
+                                    <div style="font-weight: 600; color: #333;">Operating Capital ($50,000)</div>
+                                    <div style="font-size: 0.9rem; color: #666;">6 months of runway to ensure sustainable growth</div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container funding-chart" style="flex-basis: 300px; height: 300px; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                        <canvas id="brickChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lean Option -->
+            <div id="lean-content" class="funding-content" style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); transition: all 0.3s ease;">
+                <div class="funding-details" style="display: flex; gap: 30px; align-items: flex-start;">
+                    <div style="flex: 1;">
+                        <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 16px; padding: 25px; margin-bottom: 25px; text-align: center;">
+                          <h3 style="margin: 0 0 15px 0; font-size: 1.6rem; font-weight: 700;">Lean Ask</h3>
+                          <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 15px;">
+                            <div style="font-size: 3.5rem; font-weight: 700; margin-bottom: 5px;">$75K</div>
+                            <div style="font-size: 1rem; opacity: 0.9;">Digital-First Approach</div>
+                          </div>
+                        </div>
+                        <p style="font-size: 1.1rem; color: #333; line-height: 1.6; margin-bottom: 25px;">A digital-first approach to validate the business model, build initial traction, and develop key partnerships with minimal overhead.</p>
+                        <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                            <h4 style="color: #10b981; margin-bottom: 15px; font-size: 1.3rem;">Use of Funds:</h4>
+                            <div style="display: grid; gap: 15px;">
+                                <div style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                                  <div style="background: #10b981; color: white; border-radius: 50%; padding: 8px; margin-right: 12px; min-width: 35px; text-align: center; font-weight: 700;">53%</div>
+                                  <div>
+                                    <div style="font-weight: 600; color: #333;">Digital-First Launch ($40,000)</div>
+                                    <div style="font-size: 0.9rem; color: #666;">Platform development, digital marketing, and mobile coaching setup</div>
+                                  </div>
+                                </div>
+                                <div style="display: flex; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 8px;">
+                                  <div style="background: #4ecdc4; color: white; border-radius: 50%; padding: 8px; margin-right: 12px; min-width: 35px; text-align: center; font-weight: 700;">47%</div>
+                                  <div>
+                                    <div style="font-weight: 600; color: #333;">Growth Foundation ($35,000)</div>
+                                    <div style="font-size: 0.9rem; color: #666;">Coach certification program and partnership development</div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container funding-chart" style="flex-basis: 300px; height: 300px; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);">
+                        <canvas id="leanChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Milestones -->
+    <div class="slide">
+      <h2 style="text-align: center; margin-bottom: 35px; color: #1e88e5;">Timeline & Key Milestones</h2>
+      
+      <!-- Timeline Overview Header -->
+      <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 20px; padding: 30px; margin-bottom: 35px; text-align: center; box-shadow: 0 12px 35px rgba(102, 126, 234, 0.15);">
+        <h3 style="margin: 0 0 15px 0; font-size: 1.8rem; font-weight: 700;">18-Month Growth Plan</h3>
+        <p style="font-size: 1.1rem; margin: 0; line-height: 1.6; opacity: 0.95;">
+          From foundation to regional expansion, building sustainable growth in the Charleston market
+        </p>
+      </div>
+
+      <!-- Enhanced Timeline -->
+      <div style="position: relative; margin: 40px 0;">
+        <!-- Modern Timeline Line -->
+        <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 6px; height: 100%; background: linear-gradient(to bottom, #1e88e5, #4ecdc4, #f59e0b, #10b981, #8b5cf6); border-radius: 3px; z-index: 1; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);"></div>
+        
+        <!-- Timeline Items -->
+        <div style="position: relative; z-index: 2;">
+          <!-- Q4 2025 - Foundation -->
+          <div style="display: flex; align-items: center; margin: 50px 0; position: relative;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="flex: 1; text-align: right; padding-right: 40px;">
+              <div style="background: linear-gradient(135deg, #1e88e5, #4ecdc4); color: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 25px rgba(30, 136, 229, 0.15); transition: all 0.3s ease;">
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                  <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; padding: 10px; margin-right: 12px;">
+                    <span style="font-size: 1.5rem;">🏗️</span>
+                  </div>
+                  <h3 style="margin: 0; font-size: 1.4rem; font-weight: 700;">Q4 2025 - Foundation</h3>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                  <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px;">Key Focus: Business Setup & Preparation</div>
+                </div>
+                <ul style="margin: 0; padding-left: 20px; text-align: left; line-height: 1.6;">
+                  <li><strong>Secure initial funding</strong> - Close investment round</li>
+                  <li><strong>Legal foundation</strong> - Business registration, licenses</li>
+                  <li><strong>Location scouting</strong> - Charleston area prime locations</li>
+                  <li><strong>Curriculum development</strong> - Evidence-based EF programs</li>
+                </ul>
+              </div>
+            </div>
+            <div style="width: 30px; height: 30px; background: linear-gradient(135deg, #1e88e5, #4ecdc4); border: 5px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3); z-index: 3; position: relative; display: flex; align-items: center; justify-content: center;">
+              <span style="color: white; font-weight: 700; font-size: 0.8rem;">1</span>
+            </div>
+            <div style="flex: 1; padding-left: 40px;"></div>
+          </div>
+
+          <!-- Q1 2026 - Launch Preparation -->
+          <div style="display: flex; align-items: center; margin: 50px 0; position: relative;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="flex: 1; padding-right: 40px;"></div>
+            <div style="width: 30px; height: 30px; background: linear-gradient(135deg, #4ecdc4, #44a08d); border: 5px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(78, 205, 196, 0.3); z-index: 3; position: relative; display: flex; align-items: center; justify-content: center;">
+              <span style="color: white; font-weight: 700; font-size: 0.8rem;">2</span>
+            </div>
+            <div style="flex: 1; text-align: left; padding-left: 40px;">
+              <div style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 25px rgba(78, 205, 196, 0.15); transition: all 0.3s ease;">
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                  <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; padding: 10px; margin-right: 12px;">
+                    <span style="font-size: 1.5rem;">🚀</span>
+                  </div>
+                  <h3 style="margin: 0; font-size: 1.4rem; font-weight: 700;">Q1 2026 - Launch Preparation</h3>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                  <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px;">Key Focus: Infrastructure & Team Building</div>
+                </div>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                  <li><strong>Secure Charleston location</strong> - Prime visibility & accessibility</li>
+                  <li><strong>Complete buildout</strong> - Professional coaching environment</li>
+                  <li><strong>Hire founding team</strong> - 2-3 certified EF coaches</li>
+                  <li><strong>Launch marketing</strong> - Digital presence & local outreach</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Q2 2026 - Market Entry -->
+          <div style="display: flex; align-items: center; margin: 50px 0; position: relative;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="flex: 1; text-align: right; padding-right: 40px;">
+              <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.15); transition: all 0.3s ease;">
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                  <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; padding: 10px; margin-right: 12px;">
+                    <span style="font-size: 1.5rem;">🎯</span>
+                  </div>
+                  <h3 style="margin: 0; font-size: 1.4rem; font-weight: 700;">Q2 2026 - Market Entry</h3>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                  <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px;">Key Focus: Client Acquisition & Operations</div>
+                </div>
+                <ul style="margin: 0; padding-left: 20px; text-align: left; line-height: 1.6;">
+                  <li><strong>Open to first clients</strong> - Soft launch with beta families</li>
+                  <li><strong>Build to 20+ students</strong> - Steady client growth</li>
+                  <li><strong>School partnerships</strong> - Charleston County & private schools</li>
+                  <li><strong>Workshop programs</strong> - Group sessions & parent education</li>
+                </ul>
+              </div>
+            </div>
+            <div style="width: 30px; height: 30px; background: linear-gradient(135deg, #f59e0b, #d97706); border: 5px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); z-index: 3; position: relative; display: flex; align-items: center; justify-content: center;">
+              <span style="color: white; font-weight: 700; font-size: 0.8rem;">3</span>
+            </div>
+            <div style="flex: 1; padding-left: 40px;"></div>
+          </div>
+
+          <!-- Q3 2026 - Growth & B2B -->
+          <div style="display: flex; align-items: center; margin: 50px 0; position: relative;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="flex: 1; padding-right: 40px;"></div>
+            <div style="width: 30px; height: 30px; background: linear-gradient(135deg, #10b981, #059669); border: 5px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); z-index: 3; position: relative; display: flex; align-items: center; justify-content: center;">
+              <span style="color: white; font-weight: 700; font-size: 0.8rem;">4</span>
+            </div>
+            <div style="flex: 1; text-align: left; padding-left: 40px;">
+              <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15); transition: all 0.3s ease;">
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                  <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; padding: 10px; margin-right: 12px;">
+                    <span style="font-size: 1.5rem;">📈</span>
+                  </div>
+                  <h3 style="margin: 0; font-size: 1.4rem; font-weight: 700;">Q3 2026 - Growth & B2B</h3>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                  <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px;">Key Focus: Scale Operations & New Revenue</div>
+                </div>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6;">
+                  <li><strong>40+ active clients</strong> - Full operational capacity</li>
+                  <li><strong>Launch B2B services</strong> - Corporate & college partnerships</li>
+                  <li><strong>Coach certification</strong> - Develop training programs</li>
+                  <li><strong>Expansion planning</strong> - Regional growth strategy</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Q4 2026 - Regional Expansion -->
+          <div style="display: flex; align-items: center; margin: 50px 0; position: relative;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <div style="flex: 1; text-align: right; padding-right: 40px;">
+              <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 25px; border-radius: 16px; box-shadow: 0 8px 25px rgba(139, 92, 246, 0.15); transition: all 0.3s ease;">
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                  <div style="background: rgba(255, 255, 255, 0.2); border-radius: 50%; padding: 10px; margin-right: 12px;">
+                    <span style="font-size: 1.5rem;">🌟</span>
+                  </div>
+                  <h3 style="margin: 0; font-size: 1.4rem; font-weight: 700;">Q4 2026 - Regional Expansion</h3>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
+                  <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px;">Key Focus: Market Leadership & Scaling</div>
+                </div>
+                <ul style="margin: 0; padding-left: 20px; text-align: left; line-height: 1.6;">
+                  <li><strong>Multiple locations</strong> - Mt. Pleasant, Summerville sites</li>
+                  <li><strong>Franchise model</strong> - Scalable business development</li>
+                  <li><strong>Corporate programs</strong> - Enterprise training partnerships</li>
+                  <li><strong>Regional leadership</strong> - Southeast market presence</li>
+                </ul>
+              </div>
+            </div>
+            <div style="width: 30px; height: 30px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border: 5px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); z-index: 3; position: relative; display: flex; align-items: center; justify-content: center;">
+              <span style="color: white; font-weight: 700; font-size: 0.8rem;">5</span>
+            </div>
+            <div style="flex: 1; padding-left: 40px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Metrics Summary -->
+      <div style="background: linear-gradient(135deg, #f8f9fa, #e3f2fd); border-radius: 16px; padding: 30px; border-left: 6px solid #1e88e5; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+        <h3 style="color: #1e88e5; margin-bottom: 25px; font-size: 1.6rem; text-align: center;">18-Month Success Targets</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(30, 136, 229, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">👥</div>
+            <h4 style="color: #1e88e5; margin-bottom: 10px;">40+ Active Clients</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Regular coaching relationships across age groups</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(78, 205, 196, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🏢</div>
+            <h4 style="color: #4ecdc4; margin-bottom: 10px;">B2B Revenue Stream</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Corporate and institutional partnerships established</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">📍</div>
+            <h4 style="color: #f59e0b; margin-bottom: 10px;">Regional Presence</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Multiple locations serving tri-county area</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07); text-align: center; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(139, 92, 246, 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.07)'">
+            <div style="font-size: 2.5rem; margin-bottom: 15px;">🏆</div>
+            <h4 style="color: #8b5cf6; margin-bottom: 10px;">Market Leadership</h4>
+            <p style="margin: 0; color: #666; line-height: 1.5;">Recognized as Charleston's premier EF coaching provider</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-arrow nav-arrow-left" id="prevSlide">‹</div>
+  <div class="nav-arrow nav-arrow-right" id="nextSlide">›</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    let currentSlideIndex = 0;
+
+    function navigateToSlide(index, direction = 'right') {
+      const slides = document.querySelectorAll('.slide');
+      if (index < 0 || index >= slides.length) return;
+
+      const oldSlide = slides[currentSlideIndex];
+      const newSlide = slides[index];
+      
+      if(oldSlide === newSlide) return;
+
+      if (direction === 'right') {
+        oldSlide.classList.add('hide-left');
+        newSlide.style.transform = 'rotateY(-90deg) scale(0.9)';
+      } else {
+        oldSlide.classList.add('hide-right');
+        newSlide.style.transform = 'rotateY(90deg) scale(0.9)';
+      }
+      
+      oldSlide.classList.remove('active');
+      newSlide.classList.add('active');
+      
+      setTimeout(() => {
+        newSlide.style.transform = 'rotateY(0) scale(1)';
+        newSlide.style.opacity = '1';
+        oldSlide.classList.remove('hide-left', 'hide-right');
+      }, 50);
+
+      currentSlideIndex = index;
+      updateArrowVisibility();
+    }
+
+    function updateArrowVisibility() {
+      const slides = document.querySelectorAll('.slide');
+      document.getElementById('prevSlide').style.display = currentSlideIndex === 0 ? 'none' : 'flex';
+      document.getElementById('nextSlide').style.display = currentSlideIndex === slides.length - 1 ? 'none' : 'flex';
+    }
+    
+    function showFundingContent(option) {
+        const brickBtn = document.getElementById('brick-btn');
+        const leanBtn = document.getElementById('lean-btn');
+        const brickContent = document.getElementById('brick-content');
+        const leanContent = document.getElementById('lean-content');
+        
+        if (brickBtn && leanBtn && brickContent && leanContent) {
+            brickBtn.classList.remove('active');
+            leanBtn.classList.remove('active');
+            brickContent.classList.remove('active');
+            leanContent.classList.remove('active');
+            
+            if (option === 'brick') {
+                brickBtn.classList.add('active');
+                brickContent.classList.add('active');
+            } else if (option === 'lean') {
+                leanBtn.classList.add('active');
+                leanContent.classList.add('active');
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Arrow navigation
+      document.getElementById('prevSlide').addEventListener('click', () => {
+        navigateToSlide(currentSlideIndex - 1, 'left');
+      });
+      document.getElementById('nextSlide').addEventListener('click', () => {
+        navigateToSlide(currentSlideIndex + 1, 'right');
+      });
+      updateArrowVisibility(); // Initial check
+
+      // Market Counter Animation
+      const counters = document.querySelectorAll('.market-counter');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const value = parseFloat(el.dataset.value);
+            let start = 0;
+            const duration = 1500;
+            const step = (timestamp) => {
+              if (!start) start = timestamp;
+              const progress = Math.min((timestamp - start) / duration, 1);
+              let current = progress * value;
+              let text = '';
+              if (value >= 1000) text = `$${(current / 1000).toFixed(1)}B`;
+              else if (value >= 1) text = `$${current.toFixed(0)}M`;
+              else text = `$${(current * 1000).toFixed(0)}K`;
+              el.innerHTML = text + `<div style="font-size:0.9rem;font-weight:400;color:#1565c0;margin-top:8px;">${el.dataset.label}</div>`;
+              if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+            observer.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(counter => observer.observe(counter));
+
+      // Market Donut Chart
+      const donutCanvas = document.getElementById('marketDonut');
+      if (donutCanvas) {
+          new Chart(donutCanvas.getContext('2d'), {
+              type: 'doughnut',
+              data: {
+                  labels: ['TAM', 'SAM', 'SOM'],
+                  datasets: [{
+                      data: [2800, 450, 15],
+                      backgroundColor: ['#1e88e5', '#4ecdc4', '#f59e0b'],
+                      borderWidth: 0
+                  }]
+              },
+              options: { cutout: '70%', responsive: true, plugins: { legend: { display: false } } }
+          });
+      }
+
+      // --- CHART INITIALIZATIONS ---
+      let conservativeChart, baseChart, aggressiveChart, brickChart, leanChart;
+
+      function renderFinancialCharts() {
+        const sharedOptions = {
+          responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { callback: (value) => `$${value/1000}k` } } }, plugins: { legend: { display: false } }
+        };
+        if (conservativeChart) conservativeChart.destroy();
+        conservativeChart = new Chart(document.getElementById('conservativeChart'), {
+          type: 'bar', data: { labels: ['Year 1', 'Year 2', 'Year 3'], datasets: [{ label: 'Revenue', data: [150, 275, 400], backgroundColor: '#1e88e5' }] }, options: sharedOptions
+        });
+        if (baseChart) baseChart.destroy();
+        baseChart = new Chart(document.getElementById('baseChart'), {
+          type: 'bar', data: { labels: ['Year 1', 'Year 2', 'Year 3'], datasets: [{ label: 'Revenue', data: [250, 450, 700], backgroundColor: '#4ecdc4' }] }, options: sharedOptions
+        });
+        if (aggressiveChart) aggressiveChart.destroy();
+        aggressiveChart = new Chart(document.getElementById('aggressiveChart'), {
+          type: 'bar', data: { labels: ['Year 1', 'Year 2', 'Year 3'], datasets: [{ label: 'Revenue', data: [350, 750, 1200], backgroundColor: '#ff6b6b' }] }, options: sharedOptions
+        });
+      }
+
+      function renderFundingCharts() {
+        const sharedOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } };
+        if (brickChart) brickChart.destroy();
+        brickChart = new Chart(document.getElementById('brickChart'), {
+          type: 'doughnut', data: { labels: ['Space Setup', 'Operational Launch', 'Operating Capital'], datasets: [{ data: [125000, 75000, 50000], backgroundColor: ['#1e88e5', '#4ecdc4', '#ff6b6b'] }] }, options: sharedOptions
+        });
+        if (leanChart) leanChart.destroy();
+        leanChart = new Chart(document.getElementById('leanChart'), {
+          type: 'doughnut', data: { labels: ['Digital Launch', 'Growth Foundation'], datasets: [{ data: [40000, 35000], backgroundColor: ['#1e88e5', '#4ecdc4'] }] }, options: sharedOptions
+        });
+      }
+
+      // Initial Chart Renders
+      renderFinancialCharts();
+      renderFundingCharts();
+      
+      // Update Scenario Button Listeners
+      const scenarioButtons = document.querySelectorAll('.scenario-buttons button');
+      const scenarioContents = document.querySelectorAll('.scenario-content');
+
+      scenarioButtons.forEach(button => {
+          button.addEventListener('click', () => {
+              const scenario = button.dataset.scenario;
+
+              // Remove active from all buttons
+              scenarioButtons.forEach(btn => btn.classList.remove('active'));
+              button.classList.add('active');
+
+              // Hide all content first
+              scenarioContents.forEach(content => {
+                  content.classList.remove('active');
+              });
+
+              // Show the selected content with a slight delay for smooth transition
+              setTimeout(() => {
+                  const targetContent = document.getElementById(scenario);
+                  if (targetContent) {
+                      targetContent.classList.add('active');
+                  }
+              }, 100);
+          });
+      });
+
+      // Update Funding Button function to show content
+      window.showFundingContent = function(option) {
+        const brickBtn = document.getElementById('brick-btn');
+        const leanBtn = document.getElementById('lean-btn');
+        const brickContent = document.getElementById('brick-content');
+        const leanContent = document.getElementById('lean-content');
+        
+        if (brickBtn && leanBtn && brickContent && leanContent) {
+            // Remove active from all buttons and content
+            brickBtn.classList.remove('active');
+            leanBtn.classList.remove('active');
+            brickContent.classList.remove('active');
+            leanContent.classList.remove('active');
+            
+            // Add active to selected button and content with smooth transition
+            setTimeout(() => {
+                if (option === 'brick') {
+                    brickBtn.classList.add('active');
+                    brickContent.classList.add('active');
+                } else if (option === 'lean') {
+                    leanBtn.classList.add('active');
+                    leanContent.classList.add('active');
+                }
+            }, 100);
+        }
+      }
+      
+      // Team Card Click-to-Flip
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+          card.querySelector('.card-inner').classList.toggle('is-flipped');
+        });
+      });
+      
+    });
+  </script>
+</body>
+</html>
